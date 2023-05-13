@@ -7,8 +7,7 @@
 	
 	:dependencies [
 		[org.clojure/clojure "1.11.1"]
-		[enlive "1.1.6"]
-	]
+		[enlive "1.1.6"]]
 
 	:main ^:skip-aot letras.core
 	:target-path "target/%s"
