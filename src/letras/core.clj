@@ -2,7 +2,8 @@
 	(:gen-class)
 	(:require 
 		[letras.artista :refer :all]
-		[letras.pagina :refer :all]))
+		[letras.pagina :refer :all]
+		[letras.lista :refer :all]))
 
 (defn -main
 	"I don't do a whole lot ... yet."
@@ -12,6 +13,7 @@
 				(flush) 
 				(read-line))
 		html (pegaHTML url)
-		artist (getName html)] 
+		artist (getName html)
+		listaMusics (pegaLista html)] 
 		
-		(println artist)))
+		(println listaMusics)))
