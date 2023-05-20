@@ -9,11 +9,13 @@
 	"I don't do a whole lot ... yet."
 	[& args]
 	(let [
-		url (do (print "Digite a url do artista do site letras: ") 
-				(flush) 
-				(read-line))
+		;; url (do (print "Digite a url do artista do site letras: ") 
+		;; 		(flush) 
+		;; 		(read-line))
+		url "https://www.letras.mus.br/chico-science/"
 		html (pegaHTML url)
 		artist (getName html)
-		listaMusics (pegaLista html)] 
+		listaMusics (pegaLista html)
+		semRepeat (apagaRepetido listaMusics)] 
 		
-		(println listaMusics)))
+		(showLista semRepeat)))
