@@ -6,7 +6,6 @@
 		[letras.lista :refer :all]
 		[letras.arqs :refer :all]))
 
-
 (defn -main
 	"I don't do a whole lot ... yet."
 	[& args]
@@ -14,7 +13,7 @@
 		;; url (do (print "Digite a url do artista do site letras: ") 
 		;; 		(flush) 
 		;; 		(read-line))
-		url "https://www.letras.mus.br/chico-science/"
+		url "https://www.letras.mus.br/lana-del-rey/"
 		html (pegaHTML url)
 		artist (getName html)
 		listaMusics (pegaLista html)
@@ -22,12 +21,13 @@
 		pasta (str "src/data/" (clojure.string/replace artist #" " "_"))
 		] 
 		(do
-			(println pasta)
-			(abrirPasta artist)
+			;; (println
+			;; 	artist
+			;; 	listaMusics
+			;; 	)
+			(abrirPasta artist pasta)
 			(separa artist) ; Separar o nome do artista em uma lista por spaço
-			(println "Artista: " artist "\n\n" )
-			(println (clojure.string/replace artist #" " "_") )
-			;(showLista semRepeat)
+			(salvaLista semRepeat pasta)
 			)))
 
 
