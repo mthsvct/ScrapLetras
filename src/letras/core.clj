@@ -4,7 +4,9 @@
 		[letras.artista :refer :all]
 		[letras.pagina :refer :all]
 		[letras.lista :refer :all]
-		[letras.arqs :refer :all]))
+		[letras.arqs :refer :all]
+		[letras.letra :refer :all]
+		))
 
 (defn -main
 	"I don't do a whole lot ... yet."
@@ -21,14 +23,10 @@
 		pasta (str "src/data/" (clojure.string/replace artist #" " "_"))
 		] 
 		(do
-			;; (println
-			;; 	artist
-			;; 	listaMusics
-			;; 	)
 			(abrirPasta artist pasta)
 			(separa artist) ; Separar o nome do artista em uma lista por spaço
 			(salvaLista semRepeat pasta)
-			)))
+			(pegaLetras semRepeat pasta))))
 
 
 ; Criar uma pasta: (.mkdir (java.io.File. "src/data/chico"))

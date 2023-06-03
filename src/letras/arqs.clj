@@ -6,9 +6,7 @@
 		[letras.lista :refer :all]
         [clojure.string :as str]))
 
-(defn abrirPasta [artist pasta] 
-	(do (.mkdir (java.io.File. pasta))
-		(.mkdir (java.io.File. (str pasta "/letras")))))
+(defn abrirPasta [artist pasta] (do (.mkdir (java.io.File. pasta)) (.mkdir (java.io.File. (str pasta "/lyrics")))))
 
 (defn separa [artist] (str/split artist #" "))
 
