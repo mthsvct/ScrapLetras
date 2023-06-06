@@ -36,6 +36,8 @@
 		]
 		(do (spit arquivo (str titulo "\n\n" letra)))))
 
+; Apresentar em qual música está tipo 1/100...4/100
 (defn pegaLetras [lista pasta] 
-	(doseq [musica lista] (mainLetra musica pasta))
-)
+	(doseq [musica lista] 
+		(mainLetra musica pasta)
+		(println (str "Letra da música " (get musica :titulo) " salva com sucesso!"))))

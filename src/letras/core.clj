@@ -6,6 +6,7 @@
 		[letras.lista :refer :all]
 		[letras.arqs :refer :all]
 		[letras.letra :refer :all]
+		[letras.arvore :refer :all]
 		))
 
 (defn -main
@@ -21,12 +22,15 @@
 		listaMusics (pegaLista html)
 		semRepeat (apagaRepetido listaMusics)
 		pasta (str "src/data/" (clojure.string/replace artist #" " "_"))
+		raiz nil
 		] 
 		(do
 			(abrirPasta artist pasta)
-			(separa artist) ; Separar o nome do artista em uma lista por spaço
 			(salvaLista semRepeat pasta)
-			(pegaLetras semRepeat pasta))))
+			(pegaLetras semRepeat pasta)
+			; fazer a parte da leitura e da criação da árvore	
+			
+		)))
 
 
 ; Criar uma pasta: (.mkdir (java.io.File. "src/data/chico"))
