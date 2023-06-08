@@ -29,7 +29,7 @@
 			(salvaLista semRepeat pasta)
 			(pegaLetras semRepeat pasta)
 			; fazer a parte da leitura e da criação da árvore	
-			
+			; ler o arquivo
 		)))
 
 

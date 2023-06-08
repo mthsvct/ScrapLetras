@@ -18,3 +18,5 @@
 		conteudo (apply str (map #(str %1 ";" %2 "\n") (map :titulo semRepeat) (map :link semRepeat)))
 		]
 		(salva (str coluna1 conteudo) (str pasta "/lista.csv"))))
+
+(defn abrirArq [arq] (slurp arq))
