@@ -27,7 +27,7 @@
 		(do
 			(abrirPasta artist pasta)
 			(salvaLista semRepeat pasta)
-			(pegaLetras semRepeat pasta)
+			(pegaLetras semRepeat pasta raiz)
 			; fazer a parte da leitura e da criação da árvore	
 			; ler o arquivo
 		)))

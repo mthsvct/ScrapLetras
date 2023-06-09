@@ -5,7 +5,10 @@
 		[letras.pagina :refer :all]
 		[letras.lista :refer :all]
         [clojure.string :as str]
-		[net.cgrand.enlive-html :as html]))
+		[net.cgrand.enlive-html :as html]
+		[letras.arvore :refer :all]
+		[letras.palavras :refer :all]
+		))
 
 ; Primeiro pegar o HTML da página
 ; Depois pegar o nome da música
@@ -25,19 +28,26 @@
 
 (defn lyric [page] (estrofe (extrair (pegaLetra page))))
 
-(defn mainLetra [musica pasta] 
+(defn mainLetra [musica pasta raiz] 
 	(let 
-		[
-			url (str (get musica :link))
+
+		[	url (str (get musica :link))
 			titulo (get musica :titulo)
 			arquivo (str pasta "/lyrics/" (clojure.string/replace titulo #" " "_") ".txt")
 			page (pegaHTML url)
 			letra (str/join "" (lyric page))
-		]
-		(do (spit arquivo (str titulo "\n\n" letra)))))
+			listaWords (pegaPalavras letra)
+			
+			]
+
+		(do 
+			(println listaWords)
+			(spit arquivo (str titulo "\n\n" letra)))))
 
 ; Apresentar em qual música está tipo 1/100...4/100
-(defn pegaLetras [lista pasta] 
+(defn pegaLetras [lista pasta raiz] 
 	(doseq [musica lista] 
-		(mainLetra musica pasta)
-		(println (str "Letra da música " (get musica :titulo) " salva com sucesso!"))))
+		(mainLetra musica pasta raiz)
+		(println 
+			(str 
+				"Letra da música " (get musica :titulo) " salva com sucesso!"))))
