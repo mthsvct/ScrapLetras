@@ -2,7 +2,13 @@
 
 (defn pega [m] (get m :valor))
 
-(defn criaNo [valor] {:valor valor :count 0 :esquerda nil :direita nil})
+(defn criaNo [valor] 
+    {
+        :valor valor 
+        :count 1 
+        ;; :apareceEm []
+        :esquerda nil 
+        :direita nil})
 
 (defn insere [novo raiz]
     (cond (nil? raiz) novo
@@ -48,3 +54,22 @@
         (do (inOrdemReverse (get raiz :direita))
             (println (pega raiz)) 
             (inOrdemReverse (get raiz :esquerda)))))
+
+(defn conta [raiz] 
+    "Conta a quantidade de nos da arvore"
+    (if (nil? raiz) 
+        0 
+        (+  1 
+            (conta (get raiz :esquerda))
+            (conta (get raiz :direita)))))
+
+(defn vazia? [raiz] (= (conta raiz) 0))
+
+(defn gestaoShow [raiz op]
+    (if (vazia? raiz) 
+        (println "A arvore esta vazia")
+        (cond
+            (= op 1) (preOrdem raiz)
+            (= op 2) (inOrdem raiz)
+            (= op 3) (posOrdem raiz)
+            (= op 4) (inOrdemReverse raiz))))

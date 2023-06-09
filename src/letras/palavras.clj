@@ -14,6 +14,7 @@
                 (str/lower-case))
             (str/split letra #"\s"))))
 
-
+(defn inserirWords [lista raiz] (if (empty? lista) raiz (inserirWords (rest lista) (gestaoInsere raiz (first lista)) )))
+    
 
 

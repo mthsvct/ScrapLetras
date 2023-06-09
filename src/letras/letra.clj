@@ -10,12 +10,6 @@
 		[letras.palavras :refer :all]
 		))
 
-; Primeiro pegar o HTML da página
-; Depois pegar o nome da música
-; Gerar o nome do arquivo com o nome da música onde o espaço é _
-; Depois pegar a letra da música
-; Depois salvar a letra da música no arquivo
-
 (defn pegaLetra [page] (map #(get % :content) (html/select page [:div.cnt-letra :p])))
 
 (defn filtra [l] (filter #(= (class %) java.lang.String) l))
@@ -30,24 +24,27 @@
 
 (defn mainLetra [musica pasta raiz] 
 	(let 
-
 		[	url (str (get musica :link))
 			titulo (get musica :titulo)
 			arquivo (str pasta "/lyrics/" (clojure.string/replace titulo #" " "_") ".txt")
 			page (pegaHTML url)
 			letra (str/join "" (lyric page))
 			listaWords (pegaPalavras letra)
-			
-			]
-
-		(do 
-			(println listaWords)
-			(spit arquivo (str titulo "\n\n" letra)))))
+			raiz (inserirWords listaWords raiz)	]
+		(do (spit arquivo (str titulo "\n\n" letra)) raiz)))
 
 ; Apresentar em qual música está tipo 1/100...4/100
-(defn pegaLetras [lista pasta raiz] 
-	(doseq [musica lista] 
-		(mainLetra musica pasta raiz)
-		(println 
-			(str 
-				"Letra da música " (get musica :titulo) " salva com sucesso!"))))
+;; (defn pegaLetras [lista pasta raiz] 
+;; 	(doseq [musica lista] 
+;; 		(mainLetra musica pasta raiz)
+;; 		(println (str "Letra da música " (get musica :titulo) " salva com sucesso!"))))
+
+
+(defn pegaLetras [lista pasta raiz]
+	(if (empty? lista) 
+		raiz
+		(let [
+			raiz (mainLetra (first lista) pasta raiz)
+			]
+			(println (str "Letra da música " (get (first lista) :titulo) " salva com sucesso!"))
+			(pegaLetras (rest lista) pasta raiz))))
